@@ -1,5 +1,6 @@
 import { Html, Head, Main, NextScript } from 'next/document'
-//in Next everything is a component, incluind the html, only code we want to be available in the whole project
+//in Next everything is a component, incluind the html, add here only the code we want to be available in the whole project
+//will be loaded in all pages of the app
 export default function Document() {
   return (
     <Html lang='en'>
