@@ -5,7 +5,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const priceId = ''
+  const priceId = 'price_1Mru4cD1GiYndNRMKtSxSCho'
 
   const successUrl = `${process.env.NEXT_URL}/success`
   const cancelUrl = `${process.env.NEXT_URL}/`
@@ -21,4 +21,9 @@ export default async function handler(
       },
     ],
   })
+
+  return res.status(201).json({
+    checkoutUrl: checkoutSession.url
+  })
+
 }

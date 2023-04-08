@@ -22,7 +22,9 @@ interface ProductProps {
 }
 
 export default function Product({ product }: ProductProps) {
-  function handleBuyProducy()
+  function handleBuyProduct() {
+    console.log(product.defaultPriceId)
+  }
   const { isFallback } = useRouter()
   if (isFallback) {
     return <p>Loading...</p>
@@ -37,7 +39,7 @@ export default function Product({ product }: ProductProps) {
         <h1>{product.name}</h1>
         <span>{product.price}</span>
         <p>{product.description}</p>
-        <button>Buy now</button>
+        <button onClick={handleBuyProduct} >Buy now</button>
       </ProductDetails>
     </ProductContainer>
   )
