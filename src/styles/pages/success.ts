@@ -18,7 +18,20 @@ export const SuccessContainer = styled('main', {
     color: '$gray300',
     maxWidth: 460,
     textAlign: 'center',
+    marginTop: '2rem',
   },
+
+  a: {
+    display:'block',
+    marginTop: '5rem',
+    fontSize: '$lg',
+    color: '$green500',
+    textDecoration: 'none',
+    fontWeigth: 'bold',
+    '&:hover': {
+      color: '$green300',
+    }
+  }
 })
 
 export const ImageContainer = styled('div', {
@@ -31,8 +44,7 @@ export const ImageContainer = styled('div', {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  marginTop: '2rem',
-  marginBottom: '4rem',
+  marginTop: '4rem',
 
   img: {
     objectFit: 'conver',
