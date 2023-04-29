@@ -10,6 +10,7 @@ import {
 } from './../../styles/pages/product'
 import axios from 'axios'
 import { useState } from 'react'
+import Head from 'next/head'
 
 interface ProductProps {
   product: {
@@ -23,20 +24,20 @@ interface ProductProps {
   }
 }
 
-export default  function Product({ product }: ProductProps) {
-  const [isCreatingCheckoutSection, setIsCreatingCheckoutSection] = useState(false)
+export default function Product({ product }: ProductProps) {
+  const [isCreatingCheckoutSection, setIsCreatingCheckoutSection] =
+    useState(false)
   async function handleBuyProduct() {
     try {
       setIsCreatingCheckoutSection(true)
       // api and frontend are running on the same host, that's why we dont need to config axios
       const response = await axios.post('/api/checkout', {
-        priceId: product.defaultPriceId
+        priceId: product.defaultPriceId,
       })
 
       const { checkoutUrl } = response.data
       window.location.href = checkoutUrl
-    }
-    catch (err) {
+    } catch (err) {
       //connect with obervability tool (datadog/ sentry)
       setIsCreatingCheckoutSection(false)
       alert('Falha ao redirecionar ao checkout')
@@ -50,17 +51,27 @@ export default  function Product({ product }: ProductProps) {
   }
 
   return (
-    <ProductContainer>
-      <ImageContainer>
-        <Image src={product.imageUrl} width={520} height={480} alt={''} />
-      </ImageContainer>
-      <ProductDetails>
-        <h1>{product.name}</h1>
-        <span>{product.price}</span>
-        <p>{product.description}</p>
-        <button disabled={isCreatingCheckoutSection} onClick={handleBuyProduct} >Buy now</button>
-      </ProductDetails>
-    </ProductContainer>
+    <>
+      <Head>
+        <title>{product.name} | Ignite Shop</title>
+      </Head>
+      <ProductContainer>
+        <ImageContainer>
+          <Image src={product.imageUrl} width={520} height={480} alt={''} />
+        </ImageContainer>
+        <ProductDetails>
+          <h1>{product.name}</h1>
+          <span>{product.price}</span>
+          <p>{product.description}</p>
+          <button
+            disabled={isCreatingCheckoutSection}
+            onClick={handleBuyProduct}
+          >
+            Buy now
+          </button>
+        </ProductDetails>
+      </ProductContainer>
+    </>
   )
 }
 
